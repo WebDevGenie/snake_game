@@ -21,6 +21,13 @@ y1_change=0
 
 clock = pygame.time.Clock()
 
+font_style = pygame.font.SysFont(None, 50)
+
+# Message function
+def message(msg,color):
+  mesg = font_style.render(msg, True, color)
+  dis.blit(mesg, [200, 200])
+
 game_over = False
 while not game_over:
     for event in pygame.event.get():
@@ -39,7 +46,9 @@ while not game_over:
             elif event.key == pygame.K_DOWN:
                 y1_change = 10
                 x1_change = 0
-  
+    if x1 >= 500 or x1 < 0 or y1 >= 500 or y1 < 0:
+      game_over=True
+
     x1 += x1_change
     y1 += y1_change
     dis.fill(black)
@@ -48,6 +57,10 @@ while not game_over:
     pygame.display.update()
 
     clock.tick(30)
+
+message("Game Over", red)
+pygame.display.update()
+
 
 pygame.quit()
 quit()
